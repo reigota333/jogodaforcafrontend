@@ -1,0 +1,20 @@
+.box {
+  background-color: rgb(245, 245, 245);
+  border-radius: 35px;
+  box-shadow: 5px 5px 10px;
+  height: 100%;
+}
+
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

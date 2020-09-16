@@ -1,0 +1,29 @@
+<div class="container m-3 box position-relative">
+  <form novalidate [formGroup]="addCatForm" (ngSubmit)="addCat()">
+    <div class="form-group row mb-8">
+      <label class="col-md-2 col-form-label" for="categoria_col"
+        >Categoria:</label
+      >
+      <div class="col-md-11">
+        <input type="text" formControlName="categoria_col" />
+      </div>
+    </div>
+    <button
+      [disabled]="!addCatForm.valid"
+      class="btn btn-primary m-3"
+      type="submit"
+    >
+      Adicionar Categoria
+    </button>
+  </form>
+  <div class="container">
+    <div class="float-right">
+      <button
+        class=" m-2 position-absolute close"
+        (click)="destroyCheck()"
+      >
+        x
+      </button>
+    </div>
+  </div>
+</div>

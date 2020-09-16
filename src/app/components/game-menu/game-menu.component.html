@@ -1,0 +1,69 @@
+<div class="container h-100">
+  <div class="row justify-content-center vertical-center">
+    <div class="col-md-6 box">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <h1>Jogo Da Forca</h1>
+        </div>
+        <hr />
+        <div class="row justify-content-center">
+          <form novalidate (ngSubmit)="start()" [formGroup]="settingsForm">
+            <div class="form-group row mb-8">
+              <label class="col-md-2 col-form-label" for="dificuldade"
+                >Dificuldade:</label
+              >
+              <div class="col-md-11">
+                <select
+                  class="custom-select mr-sm-2"
+                  id="inlineFormCustomSelect"
+                  formControlName="dificuldade"
+                >
+                  <option value="0" selected>Random</option>
+                  <option *ngFor="let dif of dificuldades" value="{{ dif.id }}">
+                    {{ dif.dificuldade_col }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row mb-8">
+              <label class="col-md-2 col-form-label" for="categoria"
+                >Categoria:</label
+              >
+              <div class="col-md-11">
+                <select
+                  class="custom-select mr-sm-2"
+                  id="inlineFormCustomSelect"
+                  formControlName="categoria"
+                >
+                  <option value="0" selected>Random</option>
+                  <option *ngFor="let cat of categorias" value="{{ cat.id }}">
+                    {{ cat.categoria_col }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="form-group row mb-8 justify-content-center"
+              style="width: 100%"
+            >
+              <div class="col-md-8">
+                <button
+                  class="btn btn-primary mr-3"
+                  type="submit"
+                  style="width: 100%"
+                  title="Start Game"
+                >
+                  Start
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a  [routerLink]="['/addword']" class="btn btn-primary settings m-3">
+  Adicionar Palavra
+</a>

@@ -1,0 +1,58 @@
+<div class="container m-3 box position-relative">
+  <form novalidate [formGroup]="addWordForm" (ngSubmit)="addWord()">
+    <div class="form-group row mb-8">
+      <label class="col-md-2 col-form-label" for="palavra_col">Palavra:</label>
+      <div class="col-md-11">
+        <input type="text" formControlName="palavra_col" />
+      </div>
+    </div>
+    <div class="form-group row mb-8">
+      <label class="col-md-2 col-form-label" for="dificuldade"
+        >Dificuldade:</label
+      >
+      <div class="col-md-11">
+        <select
+          class="custom-select mr-sm-2"
+          id="inlineFormCustomSelect"
+          formControlName="dificuldade"
+          [compareWith]="compareFn"
+        >
+          <option *ngFor="let dif of dificuldades" [ngValue]="dif">
+            {{ dif.dificuldade_col }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row mb-8">
+      <label class="col-md-2 col-form-label" for="categorias"
+        >Categorias:</label
+      >
+      <div class="col-md-11">
+        <select
+          class="custom-select"
+          formControlName="categorias"
+          [compareWith]="compareCat"
+          multiple
+        >
+          <option *ngFor="let cat of categorias" [ngValue]="cat">
+            {{ cat.categoria_col }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <button
+      [disabled]="!addWordForm.valid"
+      class="btn btn-primary m-3"
+      type="submit"
+    >
+      Adicionar Palavra
+    </button>
+  </form>
+  <div class="container">
+    <div class="float-right">
+      <button class="m-2 position-absolute close" (click)="destroyCheck()">
+        x
+      </button>
+    </div>
+  </div>
+</div>

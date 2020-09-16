@@ -1,0 +1,143 @@
+<div class="container h-100">
+  <div class="row">
+    <div class="container m-3 d-flex just justify-content-center box">
+      <div *ngFor="let char of palavraVal" class="char p-3">
+        <h1>{{ char }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="container col-md-5 p-3 m-3 justify-content-center box">
+      <div
+        class="row align-items-center justify-content-center align-items-center"
+      >
+        <form
+          autocomplete="off"
+          [formGroup]="tryWord"
+          (ngSubmit)="submitWord()"
+          class="container"
+        >
+          <div class="container">
+            <label for="palavra">
+              <input
+                class="input"
+                type="text"
+                placeholder="Tenta Advinhar"
+                formControlName="palavra"
+                id="palavra"
+                [ngClass]="{
+                  'is-invalid':
+                    (tryWord.get('palavra').touched ||
+                      tryWord.get('palavra').dirty) &&
+                    !tryWord.get('palavra').valid
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="tryWord.get('palavra').errors?.required">
+                  Tem de inserir uma palavra
+                </span>
+              </span>
+            </label>
+            <button
+              type="submit"
+              [disabled]="!tryWord.get('palavra').valid"
+              class="myButton ml-5"
+            >
+              Tentar
+            </button>
+          </div>
+        </form>
+      </div>
+      <hr />
+      <div
+        class="row align-items-center justify-content-center align-items-center"
+      >
+        <form
+          autocomplete="off"
+          [formGroup]="tryHit"
+          (ngSubmit)="submitHit()"
+          class="container"
+        >
+          <div class="container">
+            <label for="car">
+              <input
+                class="input"
+                type="text"
+                placeholder="Tenta um letra"
+                formControlName="car"
+                id="car"
+                [ngClass]="{
+                  'is-invalid':
+                    (tryHit.get('car').touched || tryHit.get('car').dirty) &&
+                    !tryHit.get('car').valid
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="tryHit.get('car').errors?.required">
+                  Tem de inserir uma letra
+                </span>
+                <span *ngIf="tryHit.get('car').errors?.maxlength">
+                  Apenas pode inserir uma letra
+                </span>
+              </span>
+            </label>
+            <button
+              type="submit"
+              [disabled]="!tryHit.valid"
+              class="myButton ml-5"
+            >
+              Tentar
+            </button>
+          </div>
+        </form>
+      </div>
+      <hr />
+      <div
+        class="row align-items-center justify-content-center align-items-center"
+      >
+        <a [routerLink]="['/home']" class="myButton">Novo Jogo</a>
+      </div>
+    </div>
+    <div class="container col-md-6 p-3 m-3 justify-content-center box">
+      <div
+        class="row align-items-center justify-content-center align-items-center"
+      >
+        <div class="container col-md-6 justify-content-center">
+          <h4>Dificuldade:</h4>
+          <div class="container">
+            <h5>{{ dificuldade.dificuldade_col }}</h5>
+          </div>
+        </div>
+        <div class="container col-md-6 justify-content-center">
+          <h4>Categorias:</h4>
+          <div class="container">
+            <div *ngFor="let cat of categorias">
+              <h5>{{ cat.categoria_col }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="container">
+          <h5>Tentativas Restantes:</h5>
+          <h5 style="color: red">{{ hitObject?.tentativas || 6 }}</h5>
+        </div>
+        <div class="container">
+          <h5>Letras Erradas:</h5>
+          <h5 style="color: red">{{ hitObject?.wrongChar || "" }}</h5>
+        </div>
+        <div class="container">
+          <h5>Palavras Erradas:</h5>
+          <h5 style="color: red">{{ hitObject?.wrongWord || "" }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="hitObject?.won || false">
+  <app-win-lost [title]="titulo_win"></app-win-lost>
+</div>
+<div *ngIf="hitObject?.lost || false">
+  <app-win-lost [title]="titulo_lost"></app-win-lost>
+</div>

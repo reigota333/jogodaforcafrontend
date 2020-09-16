@@ -1,0 +1,97 @@
+<div class="container h-100">
+  <div class="row justify-content-center vertical-center">
+    <div class="col-md-6 box">
+      <div class="container-fluid">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Palavra</th>
+              <th scope="col">Categorias</th>
+              <th scope="col">Dificuldade</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let palavra of palavras">
+              <th>{{ palavra.palavra_col }}</th>
+              <th>
+                <p *ngFor="let cat of palavra.categorias">
+                  {{ cat.categoria_col }}
+                </p>
+              </th>
+              <th>{{ palavra.dificuldade.dificuldade_col }}</th>
+              <th>
+                <button
+                  class="btn btn-primary m-1"
+                  (click)="updatePalavra(palavra)"
+                >
+                  Update
+                </button>
+                <button
+                  class="btn btn-primary m-1"
+                  (click)="delete(palavra.id)"
+                >
+                  Apagar
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container">
+          <button class="btn btn-primary m-3" (click)="palavraCre()">
+            Adicionar Palavra
+          </button>
+        </div>
+        <div *ngIf="palavraUp">
+          <app-add-form
+            [palavra]="palavraUpdate"
+            (destroyCheckPal)="closePal($event)"
+          ></app-add-form>
+        </div>
+        <div *ngIf="palavraCreate">
+          <app-add-form (destroyCheckPal)="closePal($event)"></app-add-form>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cat of categorias">
+              <th>{{ cat.categoria_col }}</th>
+              <th>
+                <button class="btn btn-primary m-1" (click)="updateCat(cat)">
+                  Update
+                </button>
+                <button class="btn btn-primary m-1" (click)="deleteCat(cat.id)">
+                  Apagar
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container">
+          <button class="btn btn-primary m-3" (click)="catCre()">
+            Adicionar Categoria
+          </button>
+        </div>
+        <div *ngIf="catCreate">
+          <app-add-cat (destroyCheckCat)="closeCat($event)"></app-add-cat>
+        </div>
+        <div *ngIf="catUp">
+          <app-add-cat
+            [categoria]="catUpdate"
+            (destroyCheckCat)="closeCat($event)"
+          ></app-add-cat>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <a [routerLink]="['/home']" class="btn btn-primary m-3 back"><-Menu</a>
+</div>
